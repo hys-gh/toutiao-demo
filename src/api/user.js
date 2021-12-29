@@ -1,10 +1,10 @@
 // 用户相关请求模块
 import request from '@/utils/request'
-// import store from '../store'
+import store from '../store'
 export const login = data => {
   return request({
     method: 'POST',
-    url: '/app/v1_0/authorizations',
+    url: '/v1_0/authorizations',
     // url: 'v1_0/authorizations',
     data
   })
@@ -14,7 +14,7 @@ export const login = data => {
 export const sendSms = mobile => {
   return request({
     method: 'GET',
-    url: `/app/v1_0/sms/codes/${mobile}`
+    url: `/v1_0/sms/codes/${mobile}`
   })
 }
 
@@ -22,10 +22,17 @@ export const sendSms = mobile => {
 export const getUserInfo = () => {
   return request({
     method: 'GET',
-    url: '/app/v1_0/user'
-    // headers: {
-    //   Authorization: `Bearer ${store.state.user.token}`
-    // }
+    url: '/v1_0/user',
+    headers: {
+      Authorization: `Bearer ${store.state.user.token}`
+    }
 
+  })
+}
+// 获取用户自己的信息
+export const getUserChannels = () => {
+  return request({
+    method: 'GET',
+    url: '/v1_0/user/channels'
   })
 }
